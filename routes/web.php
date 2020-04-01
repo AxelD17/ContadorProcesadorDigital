@@ -49,3 +49,5 @@ Route::post('/Modulo1Store', 'Modulo1Controller@store');
 Route::match(['get', 'post'], '/ImportExcelCompra', 'MayorcompraController@import');
 Route::match(['get', 'post'], '/ImportExcelVenta', 'MayorventaController@import');
 Route::match(['get', 'post'], '/ImportExcelGasto', 'MayorgastoController@import');
+
+Route::match(['get', 'post'], '/ExportExcelCompra', 'MayorcompraController@export');

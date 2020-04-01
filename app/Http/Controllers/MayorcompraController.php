@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use DB;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\MayorcomprasImport;
+use App\Exports\MayorcomprasExport;
 
 class MayorcompraController extends Controller
 {
@@ -96,5 +97,15 @@ class MayorcompraController extends Controller
         $data = DB::table('Mayorcompras')->get();
 
         return response()->json($data,200);
+    }
+
+    public function export(Request $request) 
+    {
+        //DB::select('exec my_stored_procedure(?,?,..)',array($Param1,$param2));
+        $data = DB::select('call report_xl_compras("1000","2000")');
+
+        return Excel::download(new MayorcomprasExport, 'resumen_compras.xlsx');
+
+        //return response()->json($data,200);
     }
 }
