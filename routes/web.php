@@ -44,10 +44,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/app', 'HomeController@index')->name('app');
 
 Route::post('/Modulo1Store', 'Modulo1Controller@store');
-//Route::post('/ImportExcel', 'Modulo1Controller@import');
 
 Route::match(['get', 'post'], '/ImportExcelCompra', 'MayorcompraController@import');
 Route::match(['get', 'post'], '/ImportExcelVenta', 'MayorventaController@import');
 Route::match(['get', 'post'], '/ImportExcelGasto', 'MayorgastoController@import');
+Route::match(['get', 'post'], '/ImportExcelActivo', 'ActivofijoController@import');
 
 Route::match(['get', 'post'], '/ExportExcelCompra', 'MayorcompraController@export');

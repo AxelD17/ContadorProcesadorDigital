@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Mayorcompra;
+use App\Activofijo;
 use Illuminate\Http\Request;
 use DB;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Imports\MayorcomprasImport;
-use App\Exports\MayorcomprasExport;
+use App\Imports\ActivofijosImport;
 
-class MayorcompraController extends Controller
+class ActivofijoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -45,10 +44,10 @@ class MayorcompraController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Mayorcompra  $mayorcompra
+     * @param  \App\Activofijo  $activofijo
      * @return \Illuminate\Http\Response
      */
-    public function show(Mayorcompra $mayorcompra)
+    public function show(Activofijo $activofijo)
     {
         //
     }
@@ -56,10 +55,10 @@ class MayorcompraController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Mayorcompra  $mayorcompra
+     * @param  \App\Activofijo  $activofijo
      * @return \Illuminate\Http\Response
      */
-    public function edit(Mayorcompra $mayorcompra)
+    public function edit(Activofijo $activofijo)
     {
         //
     }
@@ -68,10 +67,10 @@ class MayorcompraController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Mayorcompra  $mayorcompra
+     * @param  \App\Activofijo  $activofijo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Mayorcompra $mayorcompra)
+    public function update(Request $request, Activofijo $activofijo)
     {
         //
     }
@@ -79,32 +78,22 @@ class MayorcompraController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Mayorcompra  $mayorcompra
+     * @param  \App\Activofijo  $activofijo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Mayorcompra $mayorcompra)
+    public function destroy(Activofijo $activofijo)
     {
         //
     }
-
+    
     public function import(Request $request)
     {
         $this->validate($request, [
             'myfile' => 'required|mimes:xls,xlsx'
         ]);
-        Excel::import(new MayorcomprasImport, $request->file('myfile'));
+        Excel::import(new ActivofijosImport, $request->file('myfile'));
         
-        $data = DB::table('Mayorcompras')->get();
-
-        return response()->json($data,200);
-    }
-
-    public function export(Request $request) 
-    {
-        //DB::select('exec my_stored_procedure(?,?,..)',array($Param1,$param2));
-        $data = DB::select('call report_xl_activos();');
-
-        //return Excel::download(new MayorcomprasExport, 'resumen_compras.xlsx');
+        $data = DB::table('activofijos')->get();
 
         return response()->json($data,200);
     }
